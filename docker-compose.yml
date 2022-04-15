@@ -1,0 +1,23 @@
+version: '3.9'
+
+services:
+  website:
+    container_name: appweb
+    ports:
+      - 9000:9000
+    build: .
+    volumes:
+      - .:/usr/src/app
+    links:
+      - database
+  database:
+    container_name: dbpsql
+    restart: always
+    ports:
+      - 5432:5432
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: segka
+    
